@@ -2,7 +2,6 @@ conda_activate() {
     local env envs
     envs=$(conda env list | awk 'NF && $0 !~ /^#/')
     env=$(echo "$envs" | fzf \
-        --delimiter ' ' \
         --preview='
             pippath={-1}/bin/pip
             "$pippath" list
