@@ -2,7 +2,7 @@
 
 fkill() {
   local pid
-  pid=$(ps aux | fzf | awk '{print $2}')
+  pid=$(ps aux | fzf --accept-nth 2)
   if [ -n "$pid" ]; then
     kill -9 "$pid"
   fi 
