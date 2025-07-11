@@ -43,7 +43,7 @@ jobs:
         uses: ksm2/archive-action@v1
         with:
           format: tar.gz
-          name: install_pack
+          name: install_pack.tar.gz
           root-directory: generated
           include: |
             fzf-scripts.sh
