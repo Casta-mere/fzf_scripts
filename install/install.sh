@@ -5,6 +5,7 @@ BIN_SCRIPT="fzf-scripts.sh"
 INSTALLER_SCRIPT="install.sh"
 REPO="Casta-mere/fzf_scripts"
 SCRIPT_URL="https://github.com/$REPO/releases/latest/download/$BIN_SCRIPT"
+INSTALLER_URL="https://github.com/$REPO/releases/latest/download/$INSTALLER_SCRIPT"
 shell_name="$(basename "$SHELL")"
 
 case "$shell_name" in
@@ -70,20 +71,29 @@ uninstall() {
 
 update() {
   echo "Checking for updates..."
-  local tmp file ver_current ver_latest
+  local tmp_script tmp_installer ver_current ver_latest updated=false
+  tmp_script="$(mktemp)"
+  tmp_installer="$(mktemp)"
+
   ver_current="$(grep '^# VERSION=' "$INSTALL_DIR/$BIN_SCRIPT" | cut -d= -f2)"
-  tmp="$(mktemp)"
-  curl -fsSL "$SCRIPT_URL" -o "$tmp"
+  curl -fsSL -o "$tmp_script" "$SCRIPT_URL"
   ver_latest="$(grep '^# VERSION=' "$tmp" | cut -d= -f2)"
 
   if [[ "$ver_latest" > "$ver_current" ]]; then
-    echo "Updating: $ver_current → $ver_latest"
-    mv "$tmp" "$INSTALL_DIR/$BIN_SCRIPT"
+    echo "Updating $BIN_SCRIPT: $ver_current → $ver_latest"
+    mv "$tmp_script" "$INSTALL_DIR/$BIN_SCRIPT"
     chmod +x "$INSTALL_DIR/$BIN_SCRIPT"
-    exec "$INSTALL_DIR/$BIN_SCRIPT" --no-update "$@"
+    echo "Also updating $INSTALLER_SCRIPT"
+    mv "$tmp_installer" "./$INSTALLER_SCRIPT"
+    chmod +x "./$INSTALLER_SCRIPT"
+    updated=true
   else
-    rm "$tmp"
-    echo "Already up-to-date ($ver_current)"
+     rm "$tmp_script" "$tmp_installer"
+    echo "Already at latest version ($ver_current)"
+  fi
+
+  if [[ "$updated" = true ]]; then
+    exec "$INSTALL_DIR/$BIN_SCRIPT" --no-update "${@:2}"
   fi
 }
 
@@ -99,6 +109,6 @@ case "$1" in
   --uninstall) uninstall ;;
   --version) version ;;
   *)
-    echo "Usage: install.sh --install | --update | --uninstall"
+    echo -e "Usage: install.sh  \n --install \n --update \n --uninstall \n --version"
     ;;
 esac
