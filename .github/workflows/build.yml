@@ -39,16 +39,11 @@ jobs:
           filename: install_pack.zip
           directory: generated
 
-      - name: Create tar.gz (excluding zip)
-        uses: ksm2/archive-action@v1
-        with:
-          format: tar.gz
-          name: install_pack
-          root-directory: generated
-          include: |
-            fzf-scripts.sh
-            install.sh
-            
+      - name: Create tar.gz archive (excluding zip)
+        run: |
+          cd generated
+          tar -czvf install_pack.tar.gz fzf-scripts.sh install.sh
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
