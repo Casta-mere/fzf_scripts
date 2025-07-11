@@ -39,6 +39,7 @@ inject() {
       echo ""
       echo "$start"
       echo "$src_line"
+      echo 'alias  fzf_manage="~/.fzf-scripts/install.sh"'
       echo "$end"
       echo ""
     } >> "$rcfile"
@@ -70,10 +71,10 @@ uninstall() {
 update() {
   echo "Checking for updates..."
   local tmp file ver_current ver_latest
-  ver_current="$(grep '^# VERSION=' "$INSTALL_DIR/$BIN_SCRIPT" | cut -d\" -f2)"
+  ver_current="$(grep '^# VERSION=' "$INSTALL_DIR/$BIN_SCRIPT" | cut -d= -f2)"
   tmp="$(mktemp)"
   curl -fsSL "$SCRIPT_URL" -o "$tmp"
-  ver_latest="$(grep '^# VERSION=' "$tmp" | cut -d\" -f2)"
+  ver_latest="$(grep '^# VERSION=' "$tmp" | cut -d= -f2)"
 
   if [[ "$ver_latest" > "$ver_current" ]]; then
     echo "Updating: $ver_current → $ver_latest"
@@ -88,7 +89,7 @@ update() {
 
 version() {
   local ver_current 
-  ver_current="$(grep '^# VERSION=' "$INSTALL_DIR/$BIN_SCRIPT" | cut -d\" -f2)"
+  ver_current="$(grep '^# VERSION=' "$INSTALL_DIR/$BIN_SCRIPT" | cut -d= -f2)"
   echo "fzf-scripts $ver_current by Casta-mere"
 }
 
