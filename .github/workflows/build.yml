@@ -24,7 +24,7 @@ jobs:
 
       - name: 合并脚本 fzf-scripts.sh
         run: |
-          cat *.sh > generated/fzf-scripts.sh
+          awk 'FNR==1 && NR>1 {print ""} 1' *.sh > generated/fzf-scripts.sh
           chmod +x generated/fzf-scripts.sh
 
       - name: 准备安装脚本

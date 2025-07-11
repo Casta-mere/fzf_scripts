@@ -1,5 +1,3 @@
-#!/bin/bash
-
 fkill() {
   local pid
   pid=$(ps aux | fzf --accept-nth 2)
@@ -25,18 +23,6 @@ ffgrep() {
     if [[ -n "$ans" ]]; then
       echo $ans | head -n1 | awk -F: '{print $1":"$2}'
     fi
-}
-
-ff() {
-  local file
-  file=$(find . -type f 2>/dev/null | fzf --height 80% --reverse --preview 'batcat --color=always {}' --preview-window=right:60%:wrap)
-  if [ -n "$file" ]; then
-    local absolute_path
-    absolute_path=$(realpath "$file")
-    echo "$absolute_path"
-  else
-    echo "No file selected."
-  fi
 }
 
 ff() {

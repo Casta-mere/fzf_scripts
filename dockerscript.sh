@@ -1,5 +1,3 @@
-#!/bin/bash
-
 ContainerUP () {
     # choose from all up containers
     local header=$'NAME\tCONTAINER ID\tIMAGE\tSTATUS'
