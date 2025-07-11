@@ -21,7 +21,7 @@ download_script() {
     echo "Found existing $target, skipping download."
   else
     echo "Downloading $BIN_SCRIPT..."
-    curl -sL "$SCRIPT_URL" -o "$target"
+    curl -fsSL "$SCRIPT_URL" -o "$target"
   fi
 
   chmod +x "$target"
@@ -72,7 +72,7 @@ update() {
   local tmp file ver_current ver_latest
   ver_current="$(grep '^VERSION=' "$INSTALL_DIR/$BIN_SCRIPT" | cut -d\" -f2)"
   tmp="$(mktemp)"
-  curl -sL "$SCRIPT_URL" -o "$tmp"
+  curl -fsSL "$SCRIPT_URL" -o "$tmp"
   ver_latest="$(grep '^VERSION=' "$tmp" | cut -d\" -f2)"
 
   if [[ "$ver_latest" > "$ver_current" ]]; then
@@ -94,7 +94,7 @@ version() {
 
 case "$1" in
   --install) install ;;
-  --update) self_update "${@:2}" ;;
+  --update) update "${@:2}" ;;
   --uninstall) uninstall ;;
   --version) version ;;
   *)

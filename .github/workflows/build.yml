@@ -16,6 +16,12 @@ jobs:
       - name: Prepare generated directory
         run: mkdir -p generated
 
+      - name: Insert VERSION into script
+        run: |
+          VERSION="${{ github.ref_name }}"
+          cat "# $VERSION" > generated/fzf-scripts.sh
+
+
       - name: 合并脚本 fzf-scripts.sh
         run: |
           cat *.sh > generated/fzf-scripts.sh
