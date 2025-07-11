@@ -19,7 +19,7 @@ jobs:
       - name: Insert VERSION into script
         run: |
           VERSION="${{ github.ref_name }}"
-          cat "# $VERSION" > generated/fzf-scripts.sh
+          echo "# $VERSION" > generated/fzf-scripts.sh
 
 
       - name: 合并脚本 fzf-scripts.sh
