@@ -43,12 +43,12 @@ jobs:
         uses: ksm2/archive-action@v1
         with:
           format: tar.gz
-          name: install_pack.tar.gz
+          name: install_pack
           root-directory: generated
           include: |
             fzf-scripts.sh
             install.sh
-
+            
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
