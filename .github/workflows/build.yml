@@ -23,7 +23,7 @@ jobs:
 
       - name: 准备安装脚本
         run: |
-          cp install.sh generated/
+          cp ./install/install.sh generated/
           chmod +x generated/install.sh
 
       - name: Create Release
