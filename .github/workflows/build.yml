@@ -32,6 +32,23 @@ jobs:
           cp ./install/install.sh generated/
           chmod +x generated/install.sh
 
+      - name: Create zip archive
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: zip
+          filename: install_pack.zip
+          directory: generated
+
+      - name: Create tar.gz (excluding zip)
+        uses: ksm2/archive-action@v1
+        with:
+          format: tar.gz
+          name: install_pack
+          root-directory: generated
+          include: |
+            fzf-scripts.sh
+            install.sh
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
