@@ -13,6 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Prepare generated directory
+        run: mkdir -p generated
+
       - name: 合并脚本 fzf-scripts.sh
         run: |
           cat *.sh > generated/fzf-scripts.sh
