@@ -17,7 +17,15 @@ Right now we have:
 
 These scripts requires `fzf` as well as some other dependencies, please ensure you have them installed before using these scripts
 
-use `apt install fzf batcat` to install them
+Recommand download directly from githuh. Click [here](https://github.com/junegunn/fzf/releases) to fzf release
+
+The fzf version in packet manager (like apt) is quite out of date。Writer highly suggest use `uname --all` to check system info and download from github
+
+After downloading, upload it to your device and unzip it. Copy fzf to `/usr/bin`
+
+Other dependencies include:
+
+- batcat (apt install batcat)
 
 ## CMD Install
 
@@ -61,7 +69,15 @@ Please add fun requirements or issues to this repo
 
 脚本本身需要 `fzf` 以及一些其他依赖, 请确保在使用这些脚本前安装了这些依赖
 
-使用 `apt install fzf batcat` 安装
+建议直接去 github 下载安装，点击[链接](https://github.com/junegunn/fzf/releases)直达 release
+
+Linux 下的包管理器中的版本都很旧。笔者建议用 `uname --all` 查看系统信息，去 github 下载对应版本
+
+下载完成后，上传到服务器，解压。将 fzf 复制到 `/usr/bin` 目录下
+
+其他依赖包括
+
+- batcat (apt install batcat)
 
 ## 命令安装
 
