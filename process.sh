@@ -28,7 +28,7 @@ ffgrep() {
     )
 
     if [[ -n "$ans" ]]; then
-      echo $ans | head -n1 | awk -F: '{print $1":"$2}'
+      echo $ans | head -n1 | awk -F: '{print $1":"$2}' | xargs code -g
     fi
 }
 
