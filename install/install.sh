@@ -106,7 +106,7 @@ update() {
   curl  --connect-timeout 10 -fL -o "$tmp_script" "$SCRIPT_URL" || { echo "download fail, Try manually download from https://github.com/Casta-mere/fzf_scripts/releases"; exit 1; }
   ver_latest="$(grep '^# VERSION=' "$tmp_script" | cut -d= -f2)"
 
-  if { echo "$ver_current"; echo "$ver_latest"; } | sort -V -C; then
+  if [[ "$ver_current" != "$ver_latest" ]] && { echo "$ver_current"; echo "$ver_latest"; } | sort -V -C; then
     echo "Updating $BIN_SCRIPT: $ver_current → $ver_latest"
     mv "$tmp_script" "$INSTALLED"
     chmod +x "$INSTALLED"
