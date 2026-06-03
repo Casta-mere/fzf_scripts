@@ -17,7 +17,7 @@ Right now we have:
 
 These scripts requires `fzf` as well as some other dependencies, please ensure you have them installed before using these scripts
 
-Recommand download directly from githuh. Click [here](https://github.com/junegunn/fzf/releases) to fzf release
+Recommand download directly from github. Click [here](https://github.com/junegunn/fzf/releases) to fzf release
 
 The fzf version in packet manager (like apt) is quite out of date。Writer highly suggest use `uname --all` to check system info and download from github
 
