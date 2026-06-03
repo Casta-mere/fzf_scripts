@@ -113,7 +113,7 @@ update() {
     echo "Also updating $INSTALLER_SCRIPT"
     curl  --connect-timeout 10 -fL -o "$tmp_installer" "$INSTALLER_URL" || { echo "download fail, Try manually download from https://github.com/Casta-mere/fzf_scripts/releases"; exit 1; }
     mv "$tmp_installer" "$INSTALL_DIR/$INSTALLER_SCRIPT"
-    chmod +x "./$INSTALLER_SCRIPT"
+    chmod +x "$INSTALL_DIR/$INSTALLER_SCRIPT"
     updated=true
   else
      rm "$tmp_script" "$tmp_installer"
@@ -121,7 +121,7 @@ update() {
   fi
 
   if [[ "$updated" = true ]]; then
-    exec "$INSTALLED" --no-update 
+    echo "Update complete. Reload your shell or 'source $rc' to activate."
   fi
 }
 
