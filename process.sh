@@ -43,3 +43,21 @@ ff() {
         --bind 'ctrl-p:toggle-preview' \
 
 }
+
+h() {
+  fc -ln -2000 | awk '!seen[$0]++' \
+    | fzf --tac --no-sort --reverse \
+          --bind 'tab:down,shift-tab:up'
+}
+
+h-widget() {
+  local cmd
+  cmd=$(h) || return
+  BUFFER="$cmd"
+  CURSOR=${#BUFFER}
+  zle reset-prompt
+}
+if [[ -n $ZSH_VERSION ]]; then
+  zle -N h-widget
+  bindkey '^R' h-widget
+fi
